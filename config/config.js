@@ -5,5 +5,8 @@ module.exports = {
         user: process.env.EMAIL_USER || 'xacthuc@icheck.vn',
         pass: process.env.EMAIL_PASS || 'icheck@xacthuc'
     },
+    userType : {
+        superadmin: 1
+    }
 };
 

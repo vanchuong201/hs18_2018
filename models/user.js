@@ -10,7 +10,13 @@ exports.login = async (username, password, field = ['*']) => {
 }
 
 exports.createUser = async (body) => {
-    return models.knex(tbl_).insert()
+    return models.knex(tbl_).insert(body)
+}
+
+exports.getList = async (body, field = ['*']) => {
+    return models.knex(tbl_)
+        .select(field)
+
 }
 
 exports.updateInfo = async (username, body) => {
@@ -20,6 +26,10 @@ exports.updateInfo = async (username, body) => {
 }
 
 exports.getUserById = (id, field = ['*']) => {
+    console.log(models.knex(tbl_)
+        .select(field)
+        .where('id', id)
+        .first().toString())
     return models.knex(tbl_)
         .select(field)
         .where('id', id)

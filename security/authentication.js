@@ -22,7 +22,7 @@ module.exports = async (ctx, next) => {
     // if (!router)
     //     throw Boom.notFound('PATH not found')
 
-    let user = await userModel.getUserById(ctx.user.id)
+    let user = await userModel.getUserById(ctx.user.user_id)
     if (!user)
         throw Boom.notFound('User not found')
     return next()

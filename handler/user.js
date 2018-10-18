@@ -9,7 +9,7 @@ exports.register = async (body) => {
     if (user)
         throw Boom.notAcceptable('username already exists')
 
-    if (body.password != body.repassword)
+    if (body.password !== body.repassword)
         throw Boom.notAcceptable('password not match')
 
     body.password = crypto.createHash('sha256').update(body.password).digest('hex')
@@ -45,6 +45,14 @@ exports.login = async (body) => {
     }
 }
 
+exports.getList = async (body) => {
+    return userModel.getList(body)
+}
+
 exports.profile = async (id) => {
     return userModel.getUserById(id)
+}
+
+exports.create = async (body) => {
+    return userModel.createUser(body)
 }
