@@ -10,11 +10,14 @@ let countProduct = exports.countProduct = async (options = { field: 'id' }) => {
     let query = models.knex(tbl_)
         .count(`${options.field || 'id'} as count`)
         .first()
+    if(options.name){
+        query.where('name', 'like', options.name)
+    }
     if(options.category_id){
         query.where('category_id', options.category_id)
     }
-    if(options.name){
-        query.where('name', 'like', options.name)
+    if(options.ids){
+        query.whereIn('id', options.ids)
     }
     return query
 }
@@ -30,13 +33,16 @@ exports.getList = async (options = { fields: ['*'] }) => {
     if(options.category_id){
         product_query.where('category_id', options.category_id)
     }
+    if(options.ids){
+        product_query.whereIn('id', options.ids)
+    }
 
     //----------Total-------------
-    let total_product_query = countProduct(options)
-    
+    let total_product = countProduct(options)
+
     return Promise.props({
-        events: product_query,
-        total: total_product_query
+        products: product_query,
+        total: total_product
     })
 }
 

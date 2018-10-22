@@ -13,10 +13,29 @@ exports.createUser = async (body) => {
     return models.knex(tbl_).insert(body)
 }
 
-exports.getList = async (body, field = ['*']) => {
-    return models.knex(tbl_)
+let countUser = exports.countUser = async (options = { field: 'id' }) => {
+    let query = models.knex(tbl_)
+        .count(`${options.field || 'id'} as count`)
+        .first()
+    if(options.name){
+        query.where('name', 'like', options.name)
+    }
+    return query
+}
+exports.getList = async (options, field = ['*']) => {
+    let user_list_query = models.knex(tbl_)
         .select(field)
+    if(options.name){
+        user_list_query.where('name', 'like', options.name)
+    }
 
+    //----------Total-------------
+    let total_user = countUser(options)
+
+    return Promise.props({
+        users: user_list_query,
+        total: total_user
+    })
 }
 
 exports.updateInfo = async (username, body) => {
@@ -26,10 +45,6 @@ exports.updateInfo = async (username, body) => {
 }
 
 exports.getUserById = (id, field = ['*']) => {
-    console.log(models.knex(tbl_)
-        .select(field)
-        .where('id', id)
-        .first().toString())
     return models.knex(tbl_)
         .select(field)
         .where('id', id)

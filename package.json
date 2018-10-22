@@ -23,6 +23,7 @@
     "koa-router": "^7.3.0",
     "koa-send": "^4.1.2",
     "koa-static": "^4.0.2",
+    "lodash": "^4.17.11",
     "moment": "^2.20.1",
     "mongoose": "^4.13.13",
     "morgan": "^1.9.0",

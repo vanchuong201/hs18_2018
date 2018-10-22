@@ -45,8 +45,8 @@ exports.login = async (body) => {
     }
 }
 
-exports.getList = async (body) => {
-    return userModel.getList(body)
+exports.getList = async (options) => {
+    return userModel.getList(options)
 }
 
 exports.profile = async (id) => {
@@ -54,5 +54,9 @@ exports.profile = async (id) => {
 }
 
 exports.create = async (body) => {
+    let checkExist = await userModel.getUserByUsername(body.username)
+    if(checkExist)
+        throw Boom.notAcceptable('username already exists')
+
     return userModel.createUser(body)
 }
