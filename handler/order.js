@@ -155,3 +155,7 @@ exports.update = async (id, body, confirm) => {
 let getOrderById = exports.getOrderById = async (id) => {
     return orderModel.getOrder(id)
 }
+
+exports.getOrderDetail = async (order_id) => {
+    return orderModel.getOrderDetail(order_id)
+}

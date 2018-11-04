@@ -23,7 +23,7 @@ router.post('/create', async (ctx) => {
         if (err) throw Boom.notAcceptable(err.message)
     })
 
-    let res = await categoryHandler.create(ctx.user, body)
+    let res = await categoryHandler.create(body)
 
     ctx.body = {
         message: 'Tạo mới danh mục thành công',

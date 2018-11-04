@@ -57,6 +57,14 @@ router.get('/list', paginationUlti, async (ctx) => {
     }
 })
 
+router.get('/:id', async (ctx) => {
+    let res = await orderHandler.getOrderDetail(ctx.params["id"])
+    ctx.body = {
+        statusCode: res ? 200 : 400,
+        data: res
+    }
+})
+
 //confirm = "shipped" || "paid" || "confirm" || "done" || rejected || cancel || update
 router.put('/:id/:confirm', async (ctx) => {
     let order_id = ctx.params["id"], confirm = ctx.params["confirm"]

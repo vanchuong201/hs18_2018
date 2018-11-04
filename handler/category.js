@@ -1,6 +1,6 @@
 const categoryModel = require('../models/category')
 
-exports.create = async (user, body) => {
+exports.create = async (body) => {
     return categoryModel.createCategory(body)
 }
 

@@ -1,5 +1,4 @@
 const models = require('../config/database')
-const Promise = require('bluebird')
 const tbl_ = 'product_categories'
 
 exports.createCategory = async (body) => {
@@ -19,7 +18,5 @@ exports.getList = async (options = { fields: ['*'] }) => {
 }
 
 exports.updateCategory = async (id, body) => {
-    return models.knex(tbl_)
-        .update(body)
-        .where('id', id)
+    return models.knex(tbl_).update(body).where('id', id)
 }

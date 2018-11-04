@@ -53,6 +53,11 @@ exports.getOrder = async (id) => {
         .where('id', id)
         .first()
 }
+exports.getOrderDetail = async (order_id) => {
+    return models.knex(tbl_detail)
+        .select('*')
+        .where('order_id', order_id)
+}
 
 exports.updateOrder = async (id, body) => {
     return models.knex(tbl_)
